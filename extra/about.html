@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        :root {
+            --header-color: rgba(14, 14, 14, 0.814);
+            --font-header: white;
+            --header-hover: rgba(87, 87, 87, 0.708);
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        header {
+            background-color: var(--header-color);
+            color: var(--font-header);
+        }
+
+        .top-bar {
+            height: 60%;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+        }
+
+        .logo1 {
+            width: 100px;
+            height: 100px;
+        }
+
+        .title {
+            font-size: xx-large;
+        }
+
+        .logo2 {
+            height: 80px;
+            width: 200px;
+        }
+
+        .menu-bar {
+            height: 40%;
+            display: flex;
+            justify-content: space-evenly;
+        }
+
+        .button {
+            border-radius: 5px;
+            padding: 2px;
+            margin: 0 2px 2px 2px;
+            border: 2px solid white;
+            height: 100%;
+            text-align: center;
+        }
+
+        .button:hover {
+            background-color: var(--header-hover);
+            cursor: pointer;
+        }
+
+        main {
+            min-width: 99vw;
+            min-height: 70vh;
+        }
+
+        #display,
+        .title-bar {
+            background-color: var(--header-color);
+            color: var(--font-header);
+            text-align: center;
+            margin: 1rem 0 1rem 0;
+        }
+
+        .card-container {
+            display: grid;
+            grid: 4fr/repeat(4, 1fr);
+            justify-items: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card-item {
+            border: 2px solid red;
+            height: 15rem;
+            width: 15rem;
+
+        }
+
+        .card-item-mt {
+            height: 10rem;
+            width: 10rem;
+        }
+
+        @media screen and (max-width: 768px) {
+            header {
+                min-height: 10vh;
+            }
+
+            .top-bar {
+                padding: 5px;
+            }
+
+            .logo1 {
+                width: 15%;
+                height: 100%;
+            }
+
+            .title {
+                font-size: small;
+            }
+
+
+            .logo2 {
+                width: 20%;
+                height: 100%;
+            }
+
+            .menu-bar {
+                flex-direction: column;
+            }
+
+            .button {
+                margin: 2px;
+                padding: 5px;
+                font-size: 12px;
+            }
+
+            .card-container {
+                display: flex;
+                flex-direction: column;
+            }
+
+            .card-item,
+            .card-item-mt {
+                width: 100%;
+                margin: 5px 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="top-bar">
+            <img src="svnit_logo.png" alt="Logo 1" class="logo1">
+            <div class="title">
+                OMNI WEB BOT CONTROLLER
+            </div>
+            <img src="drishti_logo_white.png" alt="Logo 2" class="logo2">
+        </div>
+        <div class="menu-bar">
+            <div class="button" id="home_btn">HOME</div>
+            <!-- <div class="button">CONTROL</div> -->
+            <div class="button" id="about_btn">ABOUT US</div>
+        </div>
+    </header>
+
+    <main>
+        <div class="title-bar">OUR MENTORS</div>
+        <div class="card-container">
+            <div class="card-item"></div>
+            <div class="card-item"></div>
+            <div class="card-item"></div>
+            <div class="card-item"></div>
+        </div>
+        <div class="title-bar">OUR TEAM</div>
+        <div class="card-container">
+            <div class="card-item"></div>
+            <div class="card-item"></div>
+            <div class="card-item"></div>
+            <div class="card-item"></div>
+            <div class="card-item"></div>
+            <div class="card-item"></div>
+            <div class="card-item"></div>
+            <div class="card-item"></div>
+            <div class="card-item"></div>
+            <div class="card-item"></div>
+            <div class="card-item"></div>
+            <div class="card-item"></div>
+            <div class="card-item-mt"></div>
+            <div class="card-item"></div>
+            <div class="card-item"></div>
+            <div class="card-item-mt"></div>
+        </div>
+    </main>
+
+
+    <script>
+        const home = document.getElementById('home_btn')
+        const about = document.getElementById('about_btn')
+
+        home.addEventListener('click', () => {
+            window.location.href = '/home.html'
+        })
+        about.addEventListener('click', () => {
+            window.location.href = '/about.html'
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OmniWeb Bot Control</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        
+        .joystick {
+            width: 150px;
+            height: 150px;
+            background-color: #ccc;
+            border-radius: 50%;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .handle {
+            width: 50px;
+            height: 50px;
+            background-color: #f44336;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="joystick" id="joystick">
+            <div class="handle" id="handle"></div>
+        </div>
+    </div>
+    <script>
+        const joystick = document.getElementById('joystick');
+const handle = document.getElementById('handle');
+
+joystick.addEventListener('pointerdown', startDrag);
+joystick.addEventListener('pointermove', handleDrag);
+joystick.addEventListener('pointerup', stopDrag);
+
+let isDragging = false;
+
+function startDrag(event) {
+    event.preventDefault();
+    isDragging = true;
+}
+
+function handleDrag(event) {
+    if (!isDragging) return;
+
+    const rect = joystick.getBoundingClientRect();
+    const x = event.clientX - rect.left;
+    const y = event.clientY - rect.top;
+
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+
+    const dx = x - centerX;
+    const dy = y - centerY;
+
+    const distance = Math.min(rect.width / 2, Math.sqrt(dx * dx + dy * dy));
+    const angle = Math.atan2(dy, dx);
+
+    const newX = distance * Math.cos(angle);
+    const newY = distance * Math.sin(angle);
+
+    handle.style.transform = `translate(${newX}px, ${newY}px)`;
+
+    // Send joystick values to the robot
+    const normalizedX = newX / (rect.width / 2);
+    const normalizedY = -newY / (rect.height / 2); // Invert Y for robot's coordinate system
+    sendJoystickData(normalizedX, normalizedY);
+}
+
+function stopDrag(event) {
+    isDragging = false;
+    handle.style.transform = 'translate(-50%, -50%)';
+
+    // Stop the robot when joystick is released
+    sendJoystickData(0, 0);
+}
+
+function sendJoystickData(x, y) {
+    // Replace with your robot's communication logic
+    const robotUrl = 'https://your-robot-url.com';
+    const endpoint = '/control';
+
+    // Example using fetch to send data to the robot
+    fetch(robotUrl + endpoint, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ x, y }),
+    })
+    .then(response => {
+        if (!response.ok) {
+            console.error('Failed to send joystick data to robot');
+        }
+    })
+    .catch(error => {
+        console.error('Error sending joystick data:', error);
+    });
+}
+
+    </script>
+</body>
+</html>

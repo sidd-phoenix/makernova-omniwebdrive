@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Controller | OmniWebDrive | DRISHTI</title>
+    <link rel="stylesheet" href="style_new.css">
+    <style>
+        .joystick-container{
+            border: 2px solid yellow;
+            width: 400px;
+            height: 400px;
+            position: fixed;
+            <!-- right: 0; -->
+            bottom: 0;
+        }
+
+        .joystick {
+            width: 70%;
+            height: 70%;
+            background-color: #333;
+            border-radius: 50%;
+            position:relative;
+            
+        }
+
+
+        .handle {
+            width: 35%;
+            height: 35%;
+            background-color: royalblue;
+            border-radius: 50%;
+            position:relative;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            cursor: pointer;
+        }
+
+        #display {
+            background-color: var(--header-color);
+            color: var(--font-header);
+            text-align: center;
+            margin: 1rem 0 1rem 0;
+        }
+
+        .circular-button {
+            width: 50px;
+            height: 50px;
+            background-color: var(--header-color);
+            color: var(--font-header);
+            font-size: 18px;
+            font-weight: bold;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+            text-decoration: none;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        
+        .circular-button:hover {
+            background-color: #555;
+            transform: scale(1.05);
+        }
+
+        .button-container{
+            display: grid;
+            width: 200px;
+            height: 200px;
+            border: 2px solid red;
+            grid-template-columns: repeat(3,1fr);
+            position: fixed;
+            right: 0;
+        }
+        .circular-button{
+            border: 2px solid royalblue;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="sidebar">
+        <div class="img-container">
+            <img src="drishti_logo_white.png" alt="">
+        </div>
+        <div class="menu-container">
+            <a href="#">Home</a>
+            <a href="#">About Us</a>
+            <a href="#">Contact</a>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="topbar">
+            <h1>OmniWebDrive</h1>
+            <div class="logo-container">
+                <img src="svnit_logo.png" alt="Logo">
+            </div>
+        </div>
+        <div class="writing-box">
+
+
+            <div class="joystick-container">
+                <div id="display">
+                    (X,Y)
+                </div>
+                <div class="joystick">
+                    <div class="handle" id="handle"></div>
+                </div>
+            </div>
+
+            <div class="button-container">
+                <div></div>
+                <div class="circular-button"></div>
+                <div></div>
+                <div class="circular-button"></div>
+                <div></div>
+                <div class="circular-button"></div>
+                <div></div>
+                <div class="circular-button"></div>
+            </div>
+        </div>
+
+        <script>
+            const joystick = document.querySelector('.joystick');
+            const handle = document.querySelector('.handle');
+
+            let isJoystickPressed = false;
+            let normX = 0;
+            let normY = 0;
+
+            joystick.addEventListener('mousedown', (e) => {
+                isJoystickPressed = true;
+                updateJoystick(e);
+            });
+            joystick.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                isJoystickPressed = true;
+                updateJoystick(e.touches[0]);
+            })
+
+
+            document.addEventListener('mousemove', (e) => {
+                if (isJoystickPressed) {
+                    updateJoystick(e);
+                }
+            });
+            document.addEventListener('touchmove', (e) => {
+                e.preventDefault();
+                if (isJoystickPressed) {
+                    updateJoystick(e.touches[0]);
+                }
+            });
+
+            document.addEventListener('mouseup', (e) => {
+                isJoystickPressed = false;
+                normX = 0;
+                normY = 0;
+                handle.style.transform = 'translate(-50%, -50%)';
+                console.log("Normalized X:", normX);
+                console.log("Normalized Y:", normY);
+                document.getElementById('display').innerText = '(' + normX + ',' + normY + ')';
+            });
+            document.addEventListener('touchend', (e) => {
+                e.preventDefault();
+                isJoystickPressed = false;
+                normX = 0;
+                normY = 0;
+                handle.style.transform = 'translate(-50%, -50%)';
+                console.log("Normalized X:", normX);
+                console.log("Normalized Y:", normY);
+                document.getElementById('display').innerText = '(' + normX + ',' + normY + ')';
+            });
+
+            function updateJoystick(e) {
+                const bounds = joystick.getBoundingClientRect();
+                const centerX = bounds.left + bounds.width / 2;
+                const centerY = bounds.top + bounds.height / 2;
+
+                const deltaX = e.clientX - centerX;
+                const deltaY = e.clientY - centerY;
+
+                const distance = Math.min(joystick.offsetWidth / 2, Math.sqrt(deltaX ** 2 + deltaY ** 2));
+                const angle = Math.atan2(deltaY, deltaX);
+
+                const maxX = Math.cos(angle) * distance;
+                const maxY = Math.sin(angle) * distance;
+
+                handle.style.transform = `translate(calc(-50% + ${maxX}px), calc(-50% + ${maxY}px))`;
+
+                // Normalize values between -1 and 1
+                normX = maxX / (joystick.offsetWidth / 2);
+                normY = -maxY / (joystick.offsetHeight / 2);
+
+                // Use normX and normY for your application
+                console.log("Normalized X:", normX);
+                console.log("Normalized Y:", normY);
+                document.getElementById('display').innerText = '(' + 128 * normX.toFixed(2) + ',' + 128 * normY.toFixed(2) + ')';
+            }
+
+        </script>
+</body>
+
+</html>

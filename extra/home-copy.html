@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OmniWebDrive | DRISHTI | SVNIT</title>
+    <style>
+        :root {
+            --img-container-height: 10%;
+            --menu-container-height: calc(100% - var(--img-container-height));
+            --logo-height:15%;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            height: 100%;
+            border: 2px dashed red;
+        }
+
+        body {
+            min-height: 100%;
+            border: 2px dashed blue;
+        }
+
+
+        .sidebar {
+            height: 100%;
+            width: 17%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+        }
+
+        .img-container {
+            border: 2px solid red;
+            height: var(--img-container-height);
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .sidebar img {
+            height: 100%;
+            width: 80%;
+            border: 2px solid blue;
+        }
+
+        .menu-container {
+            border: 2px solid red;
+            height: var(--menu-container-height);
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .sidebar a {
+            padding: 10px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 18px;
+            color: white;
+            display: block;
+            border: 2px solid blue;
+        }
+
+        .sidebar a:hover {
+            background-color: #555;
+        }
+
+        /* Main Content Styles */
+        .content {
+            margin-left: 17%;
+            height: 100vh;
+            border: 2px solid green;
+        }
+        .topbar{
+            border: 2px solid red;
+            height: var(--logo-height);
+            text-align: center;
+        }
+
+        .logo-container img {
+            height: var(--logo-height);
+            position: fixed;
+            top: 0;
+            right: 0;
+            border: 2px solid blue;
+        }
+
+        .writing-box{
+            margin-top: calc(100%-var(--logo-height));
+            border: 2px solid green;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="sidebar">
+        <div class="img-container">
+            <img src="drishti_logo_white.png" alt="">
+        </div>
+        <div class="menu-container">
+            <a href="#">Home</a>
+            <a href="#">About Us</a>
+            <a href="#">Contact</a>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="topbar">
+            <h1>OmniWebDrive</h1>
+            <div class="logo-container">
+                <img src="svnit_logo.png" alt="Logo">
+            </div>
+        </div>
+        <div class="writing-box">
+            <p>OmniWebDrive is an innovative and user-friendly cloud-based file management system designed to simplify the way you access, manage, and share your digital files. It offers a seamless experience by integrating various cloud storage providers into a single unified interface. With OmniWebDrive, you can harness the power of multiple cloud services without the complexity of switching between different platforms.</p>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,159 @@
+:root {
+    --header-color: rgba(14, 14, 14, 0.814);
+    --font-header: white;
+    --header-hover: rgba(87, 87, 87, 0.708);
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+header {
+    min-height: 15vh;
+    background-color: var(--header-color);
+    color: var(--font-header);
+}
+
+.top-bar {
+    height: 60%;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+
+.logo1 {
+    width: 100px;
+    height: 100px;
+}
+
+.title {
+    font-size: xx-large;
+}
+
+.logo2 {
+    height: 80px;
+    width: 200px;
+}
+
+.menu-bar {
+    height: 40%;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.button {
+    border-radius: 5px;
+    padding: 2px;
+    margin: 0 2px 2px 2px;
+    border: 2px solid white;
+    height: 100%;
+    text-align: center;
+}
+
+.button:hover {
+    background-color: var(--header-hover);
+    cursor: pointer;
+}
+
+main {
+    min-width: 100vw;
+    min-height: 70vh;
+}
+
+.joystick {
+    width: 15rem;
+    height: 15rem;
+    background-color: #333;
+    border-radius: 50%;
+    position: relative;
+    top: 45%;
+    left: 42%;
+}
+
+.handle {
+    width: 5rem;
+    height: 5rem;
+    background-color: #ff5733;
+    border-radius: 50%;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+}
+
+#display,
+.title-bar {
+    background-color: var(--header-color);
+    color: var(--font-header);
+    text-align: center;
+    margin: 1rem 0 1rem 0;
+}
+
+<!-- footer {
+    border: 2px dashed green;
+    min-width: 99vw;
+    min-height: 10vh;
+}-->
+@media screen and (max-width: 768px) {
+
+    /* Adjust header height and font size for smaller screens */
+    header {
+        min-height: 10vh;
+    }
+
+    .top-bar {
+        padding: 5px;
+    }
+
+    .logo1 {
+        width: 15%;
+        height: 100%;
+    }
+
+    .title {
+        font-size: small;
+    }
+
+    .logo2 {
+        width: 20%;
+        height: 100%;
+    }
+
+    .menu-bar {
+        flex-direction: column;
+    }
+
+    .button {
+        margin: 2px;
+        padding: 5px;
+        font-size: 12px;
+    }
+
+    .joystick {
+        width: 10rem;
+        height: 10rem;
+        top: 35%;
+        left: 30%;
+    }
+
+    .handle {
+        width: 3rem;
+        height: 3rem;
+    }
+
+    .card-container {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .card-item,
+    .card-item-mt {
+        width: 100%;
+        margin: 5px 0;
+    }
+}

@@ -1,0 +1,310 @@
+ :root {
+     --img-container-height: 10%;
+     --menu-container-height: calc(100% - var(--img-container-height));
+     --logo-height: 15%;
+     --header-color: rgba(14, 14, 14, 0.814);
+     --font-header: white;
+     --bg-color: black;
+     --menu-bottom-border:yellow;
+ }
+
+ * {
+     margin: 0;
+     padding: 0;
+     box-sizing: border-box;
+ }
+
+ html {
+     height: 100%;
+     /* border: 2px dashed red; */
+ }
+
+ body {
+     min-height: 100%;
+     /* border: 2px dashed blue; */
+     color: var(--font-header);
+ }
+
+
+ .sidebar {
+     height: 100%;
+     width: 17%;
+     position: fixed;
+     top: 0;
+     left: 0;
+     background-color: var(--bg-color);
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+
+ }
+
+ .img-container {
+     height: var(--img-container-height);
+     width: 100%;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     /* border: 2px solid red; */
+ }
+
+ .sidebar img {
+     height: 100%;
+     width: 80%;
+     /* border: 2px solid blue; */
+ }
+
+ .menu-container {
+     height: var(--menu-container-height);
+     width: 100%;
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+     /* border: 2px solid red; */
+ }
+
+ .sidebar a {
+     padding: 10px;
+     text-align: center;
+     text-decoration: none;
+     font-size: 18px;
+     color: white;
+     display: block;
+     border-bottom: 2px solid grey;
+     /* border: 2px solid blue; */
+ }
+
+ .sidebar a:hover {
+     background-color: #555;
+ }
+
+ /* Main Content Styles */
+ .content {
+     margin-left: 17%;
+     height: 100vh;
+     /* border: 2px solid green; */
+ }
+
+ .topbar {
+     height: var(--img-container-height);
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     background-color: var(--bg-color);
+ }
+
+ .logo-container img {
+     height: var(--logo-height);
+     position: fixed;
+     top: 0;
+     right: 0;
+     /* border: 2px solid blue; */
+ }
+
+ .writing-box {
+     margin-top: calc(100%-var(--logo-height));
+     border: 2px solid green;
+ }
+
+
+ .joystick-container{
+    border: 2px solid yellow;
+    width: 400px;
+    height: 400px;
+    position: fixed;
+    <!-- right: 0; -->
+    bottom: 0;
+}
+
+.joystick {
+    width: 70%;
+    height: 70%;
+    background-color: #333;
+    border-radius: 50%;
+    position:absolute;
+    top: 20%;
+    left: 12%;
+    
+}
+
+
+.handle {
+    width: 35%;
+    height: 35%;
+    background-color: royalblue;
+    border-radius: 50%;
+    position:relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+}
+
+#display {
+    background-color: var(--header-color);
+    color: var(--font-header);
+    text-align: center;
+    margin: 1rem 0 1rem 0;
+}
+
+.circular-button {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: var(--header-color);
+    color: var(--font-header);
+    font-size: 18px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    text-decoration: none;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.circular-button:hover {
+    background-color: #555;
+    transform: scale(1.05);
+}
+
+.button-container{
+    display: grid;
+    width: 200px;
+    height: 200px;
+    border: 2px solid red;
+    grid-template-columns: repeat(3,1fr);
+    position: fixed;
+    right: 0;
+}
+.circular-button{
+    border: 2px solid royalblue;
+}
+
+
+
+
+
+#feedback-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#feedback-form label {
+    font-weight: bold;
+    color: black;
+}
+
+#feedback-form input,
+#feedback-form textarea {
+    padding: 10px;
+    border: 2px solid black;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+#feedback-form button {
+    padding: 10px;
+    background-color: var(--header-color);
+    color: var(--font-header);
+    border: none;
+    border-radius: 4px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+#feedback-form button:hover {
+    background-color: #555;
+    transform: scale(1.05);
+}
+
+
+
+
+.title-bar {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+    margin-top: 10px;
+}
+
+.title-bar h1 {
+    margin: 0;
+}
+
+/* Mentors Container */
+.mentors-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px;
+}
+
+.mentor-card {
+    width: 250px;
+    margin: 20px;
+    background-color: #f5f5f5;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    padding: 20px;
+}
+
+.mentor-photo img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    margin: 0 auto 10px;
+}
+
+.mentor-info h2,.team-info h2{
+    margin: 0;
+}
+
+.social-links {
+    margin-top: 10px;
+}
+
+.github-link,
+.linkedin-link {
+    display: inline-block;
+    padding: 5px 10px;
+    margin: 5px;
+    background-color: #333;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.github-link:hover,
+.linkedin-link:hover {
+    background-color: #555;
+}
+
+
+.team-container{
+    display: grid;
+    grid:repeat(3,1fr)/repeat(4,1fr);
+}
+.team-card {
+    width: 250px;
+    margin: 20px;
+    background-color: #f5f5f5;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    padding: 20px;
+}
+
+
+.team-photo img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    margin: 0 auto 10px;
+}

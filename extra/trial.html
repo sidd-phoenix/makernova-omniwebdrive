@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: black;
+        }
+        
+        .container {
+            position: relative;
+            border: 2px solid white;
+        }
+        
+        .joystick {
+            width: 150px;
+            height: 150px;
+            background-color: gray;
+            border-radius: 50%;
+            position: relative;
+        }
+        
+        .handle {
+            width: 50px;
+            height: 50px;
+            background-color: red;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        .coordinates {
+            margin-top: 10px;
+            text-align: center;
+            color: white;
+            border: 2px solid white;
+        }        
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="joystick" id="joystick">
+            <div class="handle" id="handle"></div>
+        </div>
+        <div class="coordinates" id="coordinates">X: 0, Y: 0</div>
+    </div>
+
+    <script>
+        const joystick = document.getElementById('joystick');
+const handle = document.getElementById('handle');
+const coordinates = document.getElementById('coordinates');
+
+joystick.addEventListener('pointerdown', startDrag);
+joystick.addEventListener('pointermove', handleDrag);
+joystick.addEventListener('pointerup', stopDrag);
+
+let isDragging = false;
+
+function startDrag(event) {
+    event.preventDefault();
+    isDragging = true;
+}
+
+function handleDrag(event) {
+    if (!isDragging) return;
+
+    const rect = joystick.getBoundingClientRect();
+    const x = event.clientX - rect.left - rect.width / 2;
+    const y = event.clientY - rect.top - rect.height / 2;
+
+    const distance = Math.min(rect.width / 2, Math.sqrt(x * x + y * y));
+    const angle = Math.atan2(y, x);
+
+    const newX = distance * Math.cos(angle);
+    const newY = distance * Math.sin(angle);
+
+    handle.style.transform = `translate(${newX}px, ${newY}px)`;
+    coordinates.textContent = `X: ${Math.round(newX)}, Y: ${Math.round(newY)}`;
+}
+
+function stopDrag(event) {
+    isDragging = false;
+    handle.style.transform = 'translate(-50%, -50%)';
+    coordinates.textContent = 'X: 0, Y: 0';
+}
+
+    </script>
+</body>
+</html>

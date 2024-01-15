@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Controller</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html{
+            height: 100%;
+        }
+
+        body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            background: url(./bg13_1.png);
+            font-family: 'Press Start 2P', cursive;
+            background-size: cover;
+            background-repeat: no-repeat;
+
+        }
+        
+        .topbar {
+            font-size: x-large;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(to right, black, blue,black);
+            color: #fff;
+            padding: 10px;
+        }
+
+        .logo-container {
+            width: 10%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            padding: 5px;
+        }
+
+        .logo {
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+        .title-container {
+            flex-grow: 1;
+            text-align: center;
+        }
+
+        .navbar {
+            text-align: center;
+            background-color: black;
+            display: flex;
+            justify-content: space-evenly;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+        }
+
+        .content-container {
+            padding: 20px;
+        }
+        
+        .joystick-container {
+            width: 400px;
+            height: 400px;
+            position: absolute;
+            left: 37.75%;
+            top: 44%;
+
+        }
+
+        .joystick {
+            width: 70%;
+            height: 70%;
+            background-color: #333;
+            border-radius: 50%;
+            position: absolute;
+            top: 20%;
+            left: 12%;
+
+        }
+
+
+        .handle {
+            width: 35%;
+            height: 35%;
+            background-color: royalblue;
+            border-radius: 50%;
+            position: relative;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            cursor: pointer;
+        }
+
+        #display {
+            color: white;
+            text-align: center;
+            margin: 1rem 0 1rem 0;
+        }
+
+        .circular-button {
+            height: 100px;
+            width: 100px;
+            border-radius: 50%;
+            position: absolute;
+        }
+
+        .circular-button:hover{
+            cursor: pointer;
+        }
+
+        .top-right {
+            background-color:red ;
+            top: calc(40% - 50px);
+            left: calc(90% - 50px);
+        }
+
+        .top-left {
+
+            background-color: white;
+            top: calc(40% - 50px);
+            left: calc(10% - 50px);
+        }
+
+        .bottom-left {
+            background-color:  white ;
+            top: calc(65% - 50px);
+            left: calc(30% - 50px);
+        }
+
+        .bottom-right {
+            background-color: white;
+            top: calc(65% - 50px);
+            right: calc(30% - 50px);
+        }
+
+        @media screen and (max-width: 768px) {
+            .topbar {
+                font-size: large;
+            }
+        
+            .logo-container,
+            .title-container,
+            .logo {
+                width: auto;
+                max-width: 100%;
+                height: auto;
+            }
+        
+            .navbar {
+                text-align: center;
+                background-color: black;
+                padding: 10px;
+            }
+        
+            .navbar a {
+                margin: 0 5px;
+            }
+        
+            .content-container {
+                padding: 10px;
+            }
+        
+            .joystick-container {
+                width: 100%;
+                position: relative;
+            }
+        
+            .joystick {
+                width: 100%;
+                padding-bottom: 100%;
+                position: relative;
+            }
+        
+            .handle {
+                width: 30%;
+                height: 30%;
+            }
+        
+            .circular-button {
+                width: 40px;
+                height: 40px;
+            }
+        
+            .top-left {
+                top: calc(10% - 20px);
+                left: calc(10% - 20px);
+            }
+        
+            .top-right {
+                top: calc(10% - 20px);
+                right: calc(10% - 20px);
+            }
+        
+            .bottom-left {
+                top: calc(80% - 20px);
+                left: calc(10% - 20px);
+            }
+        
+            .bottom-right {
+                top: calc(80% - 20px);
+                right: calc(10% - 20px);
+            }
+        }
+
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="topbar">
+        <div class="logo-container">
+            <img src="svnit_logo.png" alt="Logo 1" class="logo">
+        </div>
+        <div class="title-container">
+            <h1>OMNI WEB DRIVE</h1>
+        </div>
+        <div class="logo-container">
+            <img src="drishti_logo_white.png" alt="Logo 2" class="logo">
+        </div>
+    </div>
+
+    <div class="navbar">
+        <a href="developers.html">Developers</a>
+    </div>
+
+    <div class="content-container">
+
+        <div class="joystick-container">
+            <div id="display">
+                (X,Y)
+            </div>
+            <div class="joystick">
+                <div class="handle" id="handle"></div>
+            </div>
+        </div>
+
+
+        <div class="circular-button top-left"></div>
+        <div class="circular-button top-right"></div>
+        <div class="circular-button bottom-left"></div>
+        <div class="circular-button bottom-right"></div>
+
+    </div>
+
+
+    <script>
+        const joystick = document.querySelector('.joystick');
+        const handle = document.querySelector('.handle');
+
+        let isJoystickPressed = false;
+        let normX = 0;
+        let normY = 0;
+
+        joystick.addEventListener('mousedown', (e) => {
+            isJoystickPressed = true;
+            updateJoystick(e);
+        });
+        joystick.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            isJoystickPressed = true;
+            updateJoystick(e.touches[0]);
+        })
+
+
+        document.addEventListener('mousemove', (e) => {
+            if (isJoystickPressed) {
+                updateJoystick(e);
+            }
+        });
+        document.addEventListener('touchmove', (e) => {
+            e.preventDefault();
+            if (isJoystickPressed) {
+                updateJoystick(e.touches[0]);
+            }
+        });
+
+        document.addEventListener('mouseup', (e) => {
+            isJoystickPressed = false;
+            normX = 0;
+            normY = 0;
+            handle.style.transform = 'translate(-50%, -50%)';
+            console.log("Normalized X:", normX);
+            console.log("Normalized Y:", normY);
+            document.getElementById('display').innerText = '(' + normX + ',' + normY + ')';
+        });
+        document.addEventListener('touchend', (e) => {
+            e.preventDefault();
+            isJoystickPressed = false;
+            normX = 0;
+            normY = 0;
+            handle.style.transform = 'translate(-50%, -50%)';
+            console.log("Normalized X:", normX);
+            console.log("Normalized Y:", normY);
+            document.getElementById('display').innerText = '(' + normX + ',' + normY + ')';
+        });
+
+        function updateJoystick(e) {
+            const bounds = joystick.getBoundingClientRect();
+            const centerX = bounds.left + bounds.width / 2;
+            const centerY = bounds.top + bounds.height / 2;
+
+            const deltaX = e.clientX - centerX;
+            const deltaY = e.clientY - centerY;
+
+            const distance = Math.min(joystick.offsetWidth / 2, Math.sqrt(deltaX ** 2 + deltaY ** 2));
+            const angle = Math.atan2(deltaY, deltaX);
+
+            const maxX = Math.cos(angle) * distance;
+            const maxY = Math.sin(angle) * distance;
+
+            handle.style.transform = `translate(calc(-50% + ${maxX}px), calc(-50% + ${maxY}px))`;
+
+            // Normalize values between -1 and 1
+            normX = maxX / (joystick.offsetWidth / 2);
+            normY = -maxY / (joystick.offsetHeight / 2);
+
+            // Use normX and normY for your application
+            console.log("Normalized X:", normX);
+            console.log("Normalized Y:", normY);
+            document.getElementById('display').innerText = '(' + 128 * normX.toFixed(2) + ',' + 128 * normY.toFixed(2) + ')';
+        }
+
+    </script>
+</body>
+
+</html>

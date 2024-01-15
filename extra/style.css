@@ -1,0 +1,16 @@
+:root{
+    --main-color:greenyellow;
+    --bg-color: rgba(0, 0, 0, 0.892);
+    --font-color:white;
+    --bg-comp:rgba(87, 87, 87, 0.708);
+    --topbar-color:
+
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--font-color);
+}

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="base_style.css">
+</head>
+
+<body>
+
+    <div class="top-bar">
+        <img src="svnit_logo.png" alt="Logo 1" class="logo1">
+        <div class="title">
+            <h1>OMNI WEB BOT</h1>
+        </div>
+        <img src="drishti_logo_white.png" alt="Logo 2" class="logo2">
+
+    </div>
+    <div class="page">
+
+
+        <div class="second-bar">
+            <button id="home" class="button" onclick="window.location.href='base.html'">HOME</button>
+            <button id="control" class="button" onclick="window.location.href='control.html'"> CONTROL</button>
+            <!-- <button id="team" class="button" onclick="window.location.href='team.html'">ABOUT US</button> -->
+        </div>
+
+
+        <div class="joystick">
+            <div class="handle" id="handle"></div>
+        </div>
+        <div id="display">
+            (X,Y)
+        </div>
+
+        <div class="theme_change" id="thm_change"></div>
+    </div>
+
+
+
+
+    <script>
+        const joystick = document.querySelector('.joystick');
+        const handle = document.querySelector('.handle');
+
+        let isJoystickPressed = false;
+        let normX = 0;
+        let normY = 0;
+
+        joystick.addEventListener('mousedown', (e) => {
+            isJoystickPressed = true;
+            updateJoystick(e);
+        });
+
+        document.addEventListener('mousemove', (e) => {
+            if (isJoystickPressed) {
+                updateJoystick(e);
+            }
+        });
+
+        document.addEventListener('mouseup', (e) => {
+            isJoystickPressed = false;
+            normX = 0;
+            normY = 0;
+            handle.style.transform = 'translate(-50%, -50%)';
+            console.log("Normalized X:", normX);
+            console.log("Normalized Y:", normY);
+            document.getElementById('display').innerText = '(' + normX + ',' + normY + ')';
+        });
+
+        function updateJoystick(e) {
+            const bounds = joystick.getBoundingClientRect();
+            const centerX = bounds.left + bounds.width / 2;
+            const centerY = bounds.top + bounds.height / 2;
+
+            const deltaX = e.clientX - centerX;
+            const deltaY = e.clientY - centerY;
+
+            const distance = Math.min(joystick.offsetWidth / 2, Math.sqrt(deltaX ** 2 + deltaY ** 2));
+            const angle = Math.atan2(deltaY, deltaX);
+
+            const maxX = Math.cos(angle) * distance;
+            const maxY = Math.sin(angle) * distance;
+
+            handle.style.transform = `translate(calc(-50% + ${maxX}px), calc(-50% + ${maxY}px))`;
+
+            // Normalize values between -1 and 1
+            normX = maxX / (joystick.offsetWidth / 2);
+            normY = -maxY / (joystick.offsetHeight / 2);
+
+            // Use normX and normY for your application
+            console.log("Normalized X:", normX);
+            console.log("Normalized Y:", normY);
+            document.getElementById('display').innerText = '(' + normX + ',' + normY + ')';
+        }
+
+    </script>
+    <script src="base_script.js"></script>
+</body>
+
+</html>
